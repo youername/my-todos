@@ -1,6 +1,8 @@
 "use client";
 
+import GoogleLogin from "@/components/auth/googleLogin";
 import Login from "@/components/auth/login";
+import { handleGoogleLogin } from "@/utils/googleLoginHanedle";
 
 export default function HomePage() {
   return (
@@ -14,7 +16,10 @@ export default function HomePage() {
               your tasks like a pro.
             </p>
           </div>
-          <Login />
+          <div>
+            <Login />
+            <GoogleLogin onGoogleLogin={handleGoogleLogin} />
+          </div>
         </div>
       </header>
       <div className="mt-10 flex flex-col items-center gap-4"></div>
