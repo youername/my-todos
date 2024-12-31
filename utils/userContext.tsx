@@ -15,8 +15,6 @@ type UserType =
     }
   | undefined;
 
-interface Props {}
-
 type UserContextType = {
   user: UserType;
   fetchUser: () => Promise<void>;
