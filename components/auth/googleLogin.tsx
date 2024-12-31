@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { UserContext } from "@/utils/userContext";
+import { useRouter } from "next/navigation";
 import { useContext, useEffect } from "react";
 
 declare global {
@@ -14,6 +15,7 @@ interface GoogleLoginProps {
 
 const GoogleLogin = ({ onGoogleLogin }: GoogleLoginProps) => {
   const userData = useContext(UserContext);
+  const router = useRouter();
   useEffect(() => {
     const loadGoogleScript = () => {
       if (typeof window.google === "undefined") {
@@ -29,10 +31,20 @@ const GoogleLogin = ({ onGoogleLogin }: GoogleLoginProps) => {
       }
     };
 
+    const handleGoogleLogin = async (response: any) => {
+      try {
+        onGoogleLogin(response);
+        await userData?.fetchUser(); // 사용자 정보 갱신
+        router.push("/todos"); // 로그인 성공 후 이동
+      } catch (error) {
+        console.error("Login failed:", error);
+      }
+    };
+
     const initializeGoogleButton = () => {
       window.google.accounts.id.initialize({
         client_id: process.env.NEXT_PUBLIC_GOOGLE_CLIENT_ID,
-        callback: onGoogleLogin,
+        callback: handleGoogleLogin,
       });
 
       window.google.accounts.id.renderButton(

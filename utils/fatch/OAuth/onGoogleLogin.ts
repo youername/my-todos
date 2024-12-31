@@ -4,8 +4,7 @@ import axios from "axios";
 export const onGoogleLogin = async (response: any) => {
   try {
     const googleResponse = await axios.post(
-      `
-			${process.env.NEXT_PUBLIC_API_URL}googleLogin`,
+      `${process.env.NEXT_PUBLIC_API_URL}googleLogin`,
       { credential: response.credential }
     );
     localStorage.setItem("qid", googleResponse.data.token);
