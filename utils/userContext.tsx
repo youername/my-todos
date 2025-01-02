@@ -10,12 +10,11 @@ type UserType =
       email: string;
       address: string;
       photoBase64: string;
+      picture: string;
       studentNum: string;
       gender: Gender;
     }
   | undefined;
-
-interface Props {}
 
 type UserContextType = {
   user: UserType;
@@ -54,7 +53,7 @@ export const UserProvider = ({ children }: { children: ReactNode }) => {
           }
         );
         setUser(response.data);
-        // console.log("response.data", response.data);
+        console.log("response.data", response.data);
 
         if (!response.data.id) {
           // localStorage.removeItem("qid");

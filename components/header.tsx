@@ -12,13 +12,22 @@ const Header: React.FC = ({}) => {
   console.log(userData);
 
   return (
-    <div className="relative h-[5rem] ">
-      <div className="mx-auto h-full flex items-center">
+    <div className="relative h-full mt-8">
+      <div className="mx-auto h-full flex items-center justify-end">
         <div className="mx-8 text-3xl font-extrabold"></div>
         <div className="mx-8 whitespace-nowrap">
           <div>
             <DropdownMenu menu={userMenu} bgColor={mainColor}>
-              <div className="text-xl">{userData?.user?.name}</div>
+              <div className="flex gap-4">
+                <div className="text-xl">{userData?.user?.name}</div>
+                <picture>
+                  <img
+                    className="w-8 rounded-full"
+                    src={userData?.user?.photoBase64}
+                    alt="profile preview"
+                  />
+                </picture>
+              </div>
             </DropdownMenu>
           </div>
         </div>
