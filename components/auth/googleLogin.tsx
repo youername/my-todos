@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { UserContext } from "@/utils/userContext";
 import { useRouter } from "next/navigation";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 
 declare global {
   interface Window {
@@ -10,10 +10,11 @@ declare global {
 }
 
 interface GoogleLoginProps {
-  onGoogleLogin: (response: any) => void;
+  onGoogleLogin: (response: any) => Promise<void>;
 }
 
 const GoogleLogin = ({ onGoogleLogin }: GoogleLoginProps) => {
+  const [loading, setLoading] = useState(false);
   const userData = useContext(UserContext);
   const router = useRouter();
   useEffect(() => {
@@ -33,11 +34,14 @@ const GoogleLogin = ({ onGoogleLogin }: GoogleLoginProps) => {
 
     const handleGoogleLogin = async (response: any) => {
       try {
-        onGoogleLogin(response);
+        setLoading(true);
+        await onGoogleLogin(response);
         await userData?.fetchUser(); // 사용자 정보 갱신
         router.push("/todos"); // 로그인 성공 후 이동
+        setLoading(false);
       } catch (error) {
         console.error("Login failed:", error);
+        setLoading(false);
       }
     };
 
@@ -49,17 +53,28 @@ const GoogleLogin = ({ onGoogleLogin }: GoogleLoginProps) => {
 
       window.google.accounts.id.renderButton(
         document.getElementById("googleButton"),
-        { theme: "outline", size: "large", width: "270" }
+        {
+          type: "icon", // 아이콘 타입으로 변경
+          shape: "circle", // 원형 모양
+          size: "large", // 크기
+          theme: "outline", // 테두리 스타일
+        }
       );
     };
 
     loadGoogleScript();
     userData?.fetchUser();
-  }, [onGoogleLogin, userData]);
+  }, [onGoogleLogin, userData, router]);
 
   return (
-    <div id="googleButton" className="w-full flex justify-center my-2">
-      google login
+    <div className="w-64">
+      {loading ? (
+        <div className="spinner" />
+      ) : (
+        <div id="googleButton" className="w-full flex justify-center my-2">
+          google login
+        </div>
+      )}
     </div>
   );
 };

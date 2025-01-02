@@ -1,7 +1,6 @@
 "use client";
 
 import GoogleLogin from "@/components/auth/googleLogin";
-import Login from "@/components/auth/login";
 import { onGoogleLogin } from "@/utils/fatch/OAuth/onGoogleLogin";
 
 export default function HomePage() {
@@ -16,8 +15,9 @@ export default function HomePage() {
               your tasks like a pro.
             </p>
           </div>
-          <Login />
-          <GoogleLogin onGoogleLogin={onGoogleLogin} />
+          <div>
+            <GoogleLogin onGoogleLogin={onGoogleLogin} />
+          </div>
         </div>
       </header>
       <div className="mt-10 flex flex-col items-center gap-4"></div>
