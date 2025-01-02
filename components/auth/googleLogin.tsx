@@ -2,6 +2,7 @@
 import { UserContext } from "@/utils/userContext";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
+import { GoogleLogoColor } from "../svg/googleLogo-color";
 
 declare global {
   interface Window {
@@ -54,10 +55,12 @@ const GoogleLogin = ({ onGoogleLogin }: GoogleLoginProps) => {
       window.google.accounts.id.renderButton(
         document.getElementById("googleButton"),
         {
-          type: "icon", // 아이콘 타입으로 변경
-          shape: "circle", // 원형 모양
-          size: "large", // 크기
-          theme: "outline", // 테두리 스타일
+          type: "standard",
+          shape: "pill",
+          theme: "filled_blue",
+          text: "continue_with",
+          size: "large",
+          logo_alignment: "left",
         }
       );
     };
@@ -67,14 +70,22 @@ const GoogleLogin = ({ onGoogleLogin }: GoogleLoginProps) => {
   }, [onGoogleLogin, userData, router]);
 
   return (
-    <div className="w-64">
-      {loading ? (
-        <div className="spinner" />
-      ) : (
-        <div id="googleButton" className="w-full flex justify-center my-2">
-          google login
+    <div className="wrap w-[350px] mx-auto">
+      <div className="flex flex-col items-center">
+        <div className="text-[4rem] text-center my-[48px] font-sans">
+          Log in
         </div>
-      )}
+        <div className="w-64">
+          {loading ? (
+            <div className="spinner" />
+          ) : (
+            <div
+              id="googleButton"
+              className="w-full flex justify-center my-2"
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 };

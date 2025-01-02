@@ -67,7 +67,7 @@ const Todos = () => {
   }, [todos, tasks]);
 
   return (
-    <div>
+    <div className=" bg-gradient-to-r from-blue-500 to-purple-500 text-white">
       <div className="w-full flex flex-col items-center ">
         {/* modal */}
         {showModal && (
