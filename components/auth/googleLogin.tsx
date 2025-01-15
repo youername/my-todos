@@ -2,7 +2,6 @@
 import { UserContext } from "@/utils/userContext";
 import { useRouter } from "next/navigation";
 import { useContext, useEffect, useState } from "react";
-import { GoogleLogoColor } from "../svg/googleLogo-color";
 
 declare global {
   interface Window {

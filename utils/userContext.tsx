@@ -1,5 +1,4 @@
 "use client";
-import { Gender } from "@/app/userInfo/page";
 import axios from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
 
@@ -12,7 +11,6 @@ type UserType =
       photoBase64: string;
       picture: string;
       studentNum: string;
-      gender: Gender;
     }
   | undefined;
 
