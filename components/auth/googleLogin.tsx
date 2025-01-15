@@ -90,4 +90,6 @@ const GoogleLogin = ({ onGoogleLogin }: GoogleLoginProps) => {
   );
 };
 
+///이상한가
+
 export default GoogleLogin;
