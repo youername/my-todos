@@ -1,6 +1,7 @@
 "use client";
 import axios from "axios";
 import { createContext, ReactNode, useEffect, useState } from "react";
+import { Buffer } from "node:buffer"; // node:buffer 모듈 가져오기
 
 type UserType =
   | {
