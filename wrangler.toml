@@ -10,3 +10,6 @@ NODE_VERSION = "18.18.0"
 
 [site]
 bucket = ".vercel/output/static"
+
+[node]
+version = "18.18.0"  
